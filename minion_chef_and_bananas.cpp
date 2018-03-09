@@ -3,22 +3,29 @@ using namespace std;
 int check(long int arr[],long int k,long int n,long int h)
 {
     long int sum=0;
+
     for(int i=0;i<n;i++)
     {
-        if(arr[i]<k)
+        if(arr[i]<=k){
           sum+=1;
-        else
-          sum+=ceil(arr[i]/k);
+
+        }
+        else{
+          sum+=arr[i]/k;
+
+          if((arr[i]%k)!=0)
+             sum+=1;
+
+        }
 
         if(sum>h)
         {
-           cout<<"\nsum:"<<sum;
+
             return 0;
         }
 
-
-
     }
+
 
     return 1;
 }
@@ -29,6 +36,7 @@ int main() {
 
     while(t--)
     {
+
         long int n,h;
         cin>>n>>h;
 
@@ -37,16 +45,22 @@ int main() {
         for(int i=0;i<n;i++)
            cin>>arr[i];
 
-        //sort(arr,arr+n);
+        long int max=arr[0];
+        for(int i=1;i<n;i++)
+        {
+            if(arr[i]>max)
+                max=arr[i];
+        }
 
         if(n==h)
           {
-              cout<<endl<<arr[n-1];
+              cout<<endl<<max;
               continue;
 
           }
 
-        long int low=1,high=arr[n-1];
+
+        long int low=1,high=max;
 
 
         while(high>=low)
